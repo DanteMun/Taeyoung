@@ -14,3 +14,9 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse( 'newspage:post_detail', args=[self.pk])
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post)
+    author = models.CharField(max_length=20)
+    message = models.TextField()

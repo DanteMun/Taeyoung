@@ -3,6 +3,6 @@ from django.conf.urls import url
 
 urlpatterns = [
 
-    url(),
+    url(r'^$','newspage.views.index', name="index"),
 
 ]

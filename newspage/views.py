@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .models import Post
+from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
 # Create your views here.
@@ -14,8 +14,10 @@ def index(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    comment_list = Comment.objects.all()
     return render(request, 'newspage/post_detail.html', {
         'post':post,
+        'comment_list' : comment_list,
         })
 
 def post_new(request):

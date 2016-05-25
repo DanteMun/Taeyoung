@@ -13,4 +13,4 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reserve( 'newspage:post_detail', args=[self.pk])
+        return reverse( 'newspage:post_detail', args=[self.pk])

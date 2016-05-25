@@ -4,8 +4,20 @@
 {% block content %}
 <div class="container">
     <div class="jumbotron">
-        <h1>NewsPage Index</h1>
-        <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
+        <h2>NewsPage 뉴스 목록</h2>
+        <h4>
+            <br>
+            <ul>
+                {% for post in post_list %}
+                <a href="{% url 'newspage:post_detail' post.pk %}">
+                    <li>
+                        {{post.title}}
+                    </li>
+                <br>
+                </a>
+                {% endfor %}
+            </ul>
+        </h4>
     </div>
 </div>
 

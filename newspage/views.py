@@ -4,7 +4,10 @@ from .models import Post
 # Create your views here.
 
 def index(request):
-    return render(request, 'newspage/index.html')
+    post_list = Post.objects.all()
+    return render(request, 'newspage/index.html', {
+        'post_list': post_list,
+        })
 
 
 def post_detail(request, pk):

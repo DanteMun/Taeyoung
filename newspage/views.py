@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, CommentForm
+
 # Create your views here.
 
 def index(request):
@@ -28,3 +29,19 @@ def post_new(request):
     return render(request, 'newspage/post_new.html', {
         'form' : form,
         })
+
+def comment_new(request, post_pk):
+    post = get_object_or_404(Post, pk= post_pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect(post)
+    else:
+        form = CommentForm()
+    return render(request, 'newspage/comment_new.html', {
+        'form' : form,
+        })
+

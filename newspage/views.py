@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
@@ -25,6 +26,7 @@ def post_new(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save()
+            messages.success(request, '새로운 뉴스가 등록되었습니다.')
             return redirect(post)
     else:
         form = PostForm()
@@ -40,6 +42,7 @@ def comment_new(request, post_pk):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
+            messages.success(request, '새로운 댓글이 등록되었습니다.')
             return redirect(post)
     else:
         form = CommentForm()
